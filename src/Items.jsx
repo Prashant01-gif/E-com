@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Chef from './chef'
+import { useState } from "react";
 import ProductDataApi from "./Component/Api/productdata.api";
 
 const Product =()=> {
@@ -9,6 +10,8 @@ const Product =()=> {
 
   },[]);
 }
+
+
 const foodItems = [
 { name: "Pizza", desc: "Hot and Spicy", price: "$19.00", img: "pza.jpeg" },
   { name: "Burger", desc: "Hot and Spicy", price: "$19.00", img: "burger.jpg" },
@@ -82,6 +85,7 @@ function Items() {
       <Section title="Soft Drinks" items={softDrinks} />
       <Section title="Hard Drinks" items={hardDrinks} />
       <Chef/>
+      <ProductDataApi/>
     </div>
   );
 }
