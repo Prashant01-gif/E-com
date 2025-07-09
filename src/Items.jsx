@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Chef from './chef'
+import ProductDataApi from "./Component/Api/productdata.api";
 
+const Product =()=> {
+
+  useEffect(()=>{
+    ProductDataApi();
+
+  },[]);
+}
 const foodItems = [
-  { name: "Pizza", desc: "Hot and Spicy", price: "$19.00", img: "pza.jpeg" },
+{ name: "Pizza", desc: "Hot and Spicy", price: "$19.00", img: "pza.jpeg" },
   { name: "Burger", desc: "Hot and Spicy", price: "$19.00", img: "burger.jpg" },
   { name: "HotDog", desc: "Hot and Spicy", price: "$19.00", img: "hotdogg.jpg" },
   { name: "Momo", desc: "Hot and Spicy", price: "$19.00", img: "momo3.webp" },
