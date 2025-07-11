@@ -30,12 +30,7 @@ function Model({ item, onClose }) {
             </p>
           </div>
 
-          <button
-           
-            className="mt-6 md:mt-auto bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300"
-          >
-            Close
-          </button>
+        
         </div>
       </div>
     </div>
