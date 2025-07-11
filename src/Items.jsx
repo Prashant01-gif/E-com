@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Chef from './chef';
+import Chef from "./chef";
 import ProductDataApi from "./Component/Api/productdata.api";
+import Model from "./Component/Model";
 
-function Card({ name, price, image }) {
+function Card({ name, price, image, onImageClick }) {
   return (
     <div className="border-gray-200 bg-white p-4 shadow-lg hover:shadow-2xl transition mx-auto w-full max-w-xs sm:max-w-none">
-      <img className="rounded-lg w-full h-48 object-cover" src={image} alt={name} />
+      <img
+        onClick={onImageClick}
+        className="rounded-lg w-full h-48 object-cover cursor-pointer"
+        src={image}
+        alt={name}
+      />
       <div>
-        <h2 className="text-gray-800 font-bold text-lg md:text-xl font-serif p-2">{name}</h2>
+        <h2 className="text-gray-800 font-bold text-lg md:text-xl font-serif p-2">
+          {name}
+        </h2>
         <div className="flex justify-between items-center mt-2 px-2">
           <p className="text-red-700 font-semibold text-base md:text-lg">
-            Price: $100
+            Price: ${price}
           </p>
-          <button className="border-red-700 bg-red-700 rounded-xl px-3 md:px-4 py-1 md:py-2 text-white text-sm md:text-base shadow-lg hover:shadow-2xl transition">
+          <button
+            className="border-red-700 bg-red-700 rounded-xl px-3 md:px-4 py-1 md:py-2 text-white text-sm md:text-base shadow-lg hover:shadow-2xl transition"
+          >
             Add to Cart
           </button>
         </div>
@@ -21,7 +31,7 @@ function Card({ name, price, image }) {
   );
 }
 
-function Section({ title, items }) {
+function Section({ title, items, onImageClick }) {
   return (
     <>
       <div className="flex justify-center items-center mt-10 md:mt-20 text-3xl md:text-4xl font-serif">
@@ -34,6 +44,7 @@ function Section({ title, items }) {
             name={item.name}
             price={item.price}
             image={item.image}
+            onImageClick={() => onImageClick(item)}
           />
         ))}
       </div>
@@ -44,10 +55,22 @@ function Section({ title, items }) {
 function Items() {
   const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     ProductDataApi(setProductData).finally(() => setLoading(false));
   }, []);
+
+  const handleImageClick = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedProduct(null);
+  };
 
   if (loading) {
     return (
@@ -59,8 +82,15 @@ function Items() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6">
-      <Section title="Recipes" items={productData} />
+      <Section
+        title="Recipes"
+        items={productData}
+        onImageClick={handleImageClick}
+      />
       <Chef />
+      {showModal && selectedProduct && (
+        <Model item={selectedProduct} onClose={handleCloseModal} />
+      )}
     </div>
   );
 }
