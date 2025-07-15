@@ -10,7 +10,6 @@ import Footer from './Footer'
 
 
 
-
 function App() {
 
   return (
@@ -21,6 +20,7 @@ function App() {
       <Category/>
       <Items/>
       <Footer/>
+     
       
        
        

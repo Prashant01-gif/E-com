@@ -1,12 +1,17 @@
 import React from 'react';
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import Button from './Navbar/Btn';
+import { NavLink, useNavigate } from 'react-router';
 
 function Navbar() {
+ 
   return (
     <nav className="bg-gray-100 shadow-2xl italic text-black p-2 sm:p-3 flex justify-between items-center sticky top-0 z-50">
       <div className="flex items-center gap-2 sm:gap-4">
-        <img src='img1.jpg' alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" />
+        <NavLink to={"/"}>
+          <img src='img1.jpg' alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" />
+        </NavLink>
+        
         <a href="#" className="text-xl sm:text-2xl font-semibold">Manrash</a>
       </div>
       <div className="flex items-center border border-black rounded-full ml-2 h-8 px-2">
@@ -20,7 +25,10 @@ function Navbar() {
         </button>
       </div>
       <div className="flex items-center gap-3">
-        <FaShoppingCart className="text-xl sm:text-2xl" />
+        <NavLink to={"/Cart"}> 
+           <FaShoppingCart className="text-xl sm:text-2xl"/>
+        </NavLink>
+       
         <Button title="Login" />
       </div>
     </nav>

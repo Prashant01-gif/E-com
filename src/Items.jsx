@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Chef from "./chef";
 import ProductDataApi from "./Component/Api/productdata.api";
 import Model from "./Component/Model";
+import AddToCart from "./Component/localStorage/AddTOCart";
 
 function Card({ name, price, image, onImageClick, added, onAddToCart }) {
   return (
@@ -88,6 +89,8 @@ function Items() {
   const handleAddToCart = (item) => {
     setAddedItems((prev) => ({ ...prev, [item.id]: true }));
     console.log(`${item.name} added`);
+    console.log(item)
+    AddToCart (item)
   };
 
   return (
