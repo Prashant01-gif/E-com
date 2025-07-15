@@ -11,8 +11,10 @@ function Navbar() {
         <NavLink to={"/"}>
           <img src='img1.jpg' alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" />
         </NavLink>
+        <NavLink to={"/"}>
+      <a href="#" className="text-xl sm:text-2xl font-semibold">Manrash</a>
+        </NavLink>
         
-        <a href="#" className="text-xl sm:text-2xl font-semibold">Manrash</a>
       </div>
       <div className="flex items-center border border-black rounded-full ml-2 h-8 px-2">
          <input
