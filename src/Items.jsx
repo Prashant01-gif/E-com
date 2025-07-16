@@ -5,7 +5,7 @@ import Model from "./Component/Model";
 import AddToCart from "./Component/localStorage/AddTOCart";
 
 function Card({ item, onImageClick, added, onAddToCart }) {
-  const { name, price, image, mealType } = item;
+  const { name, image, mealType } = item;
 
   return (
     <div className="border-gray-200 bg-white p-4 shadow-lg hover:shadow-2xl transition mx-auto w-full max-w-xs sm:max-w-none">
