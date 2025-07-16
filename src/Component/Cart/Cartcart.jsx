@@ -1,8 +1,8 @@
 import React from "react";
-
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
+import RemoveCart from "../localStorage/RemoveCart";
 
-const Cartcart = ({ item }) => { 
+const Cartcart = ({ item,setCart }) => { 
 
   return (
     <div className="flex justify-center px-4 sm:px-6 lg:px-8 mb-10 mt-5"> 
@@ -24,7 +24,7 @@ const Cartcart = ({ item }) => {
               {item?.name}
             </div>
             <div className="text-red-800 text-2xl cursor-pointer"> 
-              <MdOutlineRemoveShoppingCart />
+              <MdOutlineRemoveShoppingCart onClick={()=>RemoveCart(item,setCart)} />
             </div>
           </div>
 
