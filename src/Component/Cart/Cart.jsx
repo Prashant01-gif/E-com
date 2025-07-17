@@ -3,20 +3,16 @@ import Navbar from "../Navbar";
 import Cartcart from "./Cartcart";
 
 const Cart = () => {
+  let data = localStorage.getItem ("cart ")
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")));
 
-  console.log(cart);
+  
   return (
     <div>
       <Navbar />
-      {cart.map((item, index) => (
-        <div>
-          {" "}
-          <Cartcart item={item} setCart={setCart} key={index} />
-        </div>
-      ))}
-    </div>
-  );
+         {cart.map((item, index)   => (<Cartcart item={item} setCart={setCart} key={index} />))}
+       </div>
+  )
 };
 
 export default Cart;

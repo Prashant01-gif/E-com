@@ -4,15 +4,15 @@ const AddToCart = (productData) =>{
 
     if(tempData == null){
          let tempArray = [];
-        tempArray.push(productData);
+     tempArray.push({...productData, quantity: 1 }); 
         localStorage.setItem("cart", JSON.stringify(tempArray)) ;
-        console.log(te);
+        
         
     }
     else{
       
          let tempArray = JSON.parse(localStorage.getItem("cart"));
-         tempArray.push(productData);
+         tempArray.push(...productData, quantity: 1);
          localStorage.setItem("cart" ,JSON.stringify(tempArray));
     }
 };

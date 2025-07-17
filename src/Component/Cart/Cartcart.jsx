@@ -1,6 +1,8 @@
 import React from "react";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import RemoveCart from "../localStorage/RemoveCart";
+import Quantity from "./Quantity";
+import { data } from "react-router";
 
 const Cartcart = ({ item, setCart }) => {
   return (
@@ -38,7 +40,9 @@ const Cartcart = ({ item, setCart }) => {
               ${item?.caloriesPerServing}
             </div>
 
-            <div className="text-gray-700 text-sm sm:text-base">Quantity:1</div>
+            <div className="">
+              <Quantity quantity={item?.quantity} data={item} setCart={setCart}/>
+            </div>
 
             <button className="flex h-10 px-4 justify-center items-center border border-green-500 rounded-xl bg-green-500 text-white transition-colors duration-300 min-w-[80px] text-sm md:text-base hover:bg-green-600 hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
               Buy

@@ -12,7 +12,7 @@ function Navbar() {
           <img src='img1.jpg' alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" />
         </NavLink>
         <NavLink to={"/"}>
-      <a href="#" className="text-xl sm:text-2xl font-semibold">Manrash</a>
+   <div  className="text-xl sm:text-2xl font-semibold">Manrash</div>
         </NavLink>
         
       </div>
