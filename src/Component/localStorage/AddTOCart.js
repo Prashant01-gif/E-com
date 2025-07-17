@@ -12,7 +12,7 @@ const AddToCart = (productData) =>{
     else{
       
          let tempArray = JSON.parse(localStorage.getItem("cart"));
-         tempArray.push(...productData, quantity: 1);
+         tempArray.push({...productData, quantity: 1});
          localStorage.setItem("cart" ,JSON.stringify(tempArray));
     }
 };
