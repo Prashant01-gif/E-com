@@ -4,7 +4,7 @@ import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa'
 const Footer = () => {
   return (
     <div>
-      <div className='bg-gray-100 shadow-inner h-auto md:h-80'>
+      <div className='bg-gray-100 shadow-inner h-auto md:h-80 mt-20!'>
         <div className='text-2xl md:text-3xl italic gap-1 flex text-black pt-2 ml-4 md:ml-9'> 
           <img src='img1.jpg' alt='logo' className='h-10 w-10 rounded-3xl'/>
           <a href='#'>Manrash</a>
