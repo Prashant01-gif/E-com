@@ -5,7 +5,7 @@ function Model({ item, onClose, added, onAddToCart }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-2"
+      className="fixed inset-0 backdrop-blur flex items-center justify-center z-50 px-2"
       onClick={onClose}
     >
       <div
