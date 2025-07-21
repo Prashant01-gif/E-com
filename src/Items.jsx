@@ -11,7 +11,7 @@ function Card({ item, onImageClick, added, onAddToCart }) {
     <div className="border-gray-200 bg-white p-4 shadow-lg hover:shadow-2xl transition mx-auto w-full max-w-xs sm:max-w-none mb-5">
       <img
         onClick={onImageClick}
-        className="rounded-lg w-full h-48 object-cover cursor-pointer"
+        className="rounded-lg w-full h-60 object-cover cursor-pointer"
         src={image}
         alt={name}
       />
