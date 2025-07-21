@@ -8,8 +8,8 @@ import CheckOutModal from "./CheckOutModal";
 const Cart = () => {
   let data = localStorage.getItem("cart ");
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")));
-  const [showModal, setShowModal] = useState(false);
 
+const[visible, setVisible]= useState(false);
   return (
     <div>
       <Navbar />
@@ -20,7 +20,7 @@ const Cart = () => {
         ))}
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4">
+      <div className="flex flex-col sm:flex-row mb-5 justify-center items-center gap-4 mt-4">
         <div className="flex gap-2 text-lg items-center">
           <div className="text-orange-500 text-lg font-bold">Total Amount:</div>
           <div className="text-black font-bold text-lg sm:text-xl">
@@ -29,11 +29,11 @@ const Cart = () => {
         </div>
 
         <div>
-          <Button onClick={() => setShowModal(true)} title="Check out" />
+          <Button onClick={() => setVisible((prev)=> !prev)} title="Check out" />
         </div>
       </div>
 
-      <CheckOutModal visible={showModal} setVisible={setShowModal} />
+      {visible && (<CheckOutModal  setVisible={setVisible} />)}
     </div>
   );
 };
