@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Cartcart from "./Cartcart";
 import Totalamount from "../CustomFunction/Totalamount";
@@ -40,14 +40,18 @@ const Cart = () => {
 
           <div>
             <Button
-              onClick={() => setVisible((prev) => !prev)}
+              onClick={() => setVisible(true)}
               title="Check out"
             />
           </div>
         </div>
       )}
 
-      {visible && <CheckOutModal setVisible={setVisible} />}
+      <CheckOutModal
+        visible={visible}
+        setVisible={setVisible}
+        cart={cart} 
+      />
     </div>
   );
 };

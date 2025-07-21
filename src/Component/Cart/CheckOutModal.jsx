@@ -1,45 +1,52 @@
 import React from "react";
+import Userdetails from "./Userdetails";
+import Totalamount from "../CustomFunction/Totalamount";
 
-const CheckOutModal = ({ visible, setVisible }) => {
+const CheckOutModal = ({ visible, setVisible, cart }) => {
+  if (!visible) return null;
+
   return (
     <div
-      className="flex items-center justify-center h-screen w-screen inset-0 fixed bg-black/50 z-50 backdrop-blur-md"
+      className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-md z-50 p-4"
       onClick={() => setVisible(false)}
     >
- <div
-  className="flex flex-col gap-4 bg-white rounded-lg p-4 sm:p-6 w-[90%] max-w-md shadow-lg"
-  onClick={(e) => e.stopPropagation()}
->
-  <h2 className="text-xl sm:text-2xl font-bold text-gray-800 text-center">
-    Checkout
-  </h2>
-  <form className="flex flex-col gap-3 sm:gap-4">
-    <input
-      type="text"
-      placeholder="Full Name"
-      className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 text-sm sm:text-base"
-    />
-    <input
-      type="email"
-      placeholder="Email Address"
-      className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 text-sm sm:text-base"
-    />
-    <input
-      type="text"
-      placeholder="Shipping Address"
-      className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 text-sm sm:text-base"
-    />
-    <button
-      type="submit"
-      className="bg-red-700 text-white font-medium py-2 rounded-md hover:bg-red-800 transition text-sm sm:text-base"
-    >
-      Place Order
-    </button>
-  </form>
-</div>
+      <div
+        className="bg-white rounded-lg shadow-2xl p-6 w-full max-w-md sm:max-w-lg md:max-w-xl flex flex-col space-y-4 max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+    
+        <div className="text-orange-600 font-bold text-2xl text-center mb-2">
+          Check out
+        </div>
 
+        <div>
+          <div className="grid grid-cols-3 font-semibold text-gray-700 border-b pb-1 text-center">
+            <div>Food</div>
+            <div>Quantity</div>
+            <div>Price</div>
+          </div>
 
-    </div>  
+          <div className="flex flex-col space-y-1 mt-1">
+            {cart?.map((item, index) => (
+              <div key={index} className="grid grid-cols-3 py-2 text-center">
+                <div>{item.name}</div>
+                <div>{item.quantity}</div>
+                <div>${item.caloriesPerServing * item.quantity}</div>
+              </div>
+            ))}
+          </div>
+
+        
+          <div className="flex justify-center mt-2 text-lg font-semibold">
+            Total:{" "}
+            <span className="text-orange-600 ml-2">${Totalamount(cart)}</span>
+          </div>
+        </div>
+
+      
+        <Userdetails />
+      </div>
+    </div>
   );
 };
 
