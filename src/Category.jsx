@@ -1,69 +1,37 @@
-import React from 'react';
+import React from "react";
 
-const Category = () => {
+const icons = [
+  { name: "All", src: "./p3.png" },
+  { name: "Dinner", src: "./d2.png" },
+  { name: "Lunch", src: "./L1.png" },
+  { name: "Beverage", src: "./b2.png" },
+  { name: "Drinks", src: "./Icons/drink.png" },
+];
+
+const Categories = () => {
   return (
-    <div>
-      <div className="flex justify-center items-center mt-20 text-4xl font-serif">
-        Category
-      </div>
-      <div className="flex justify-center items-center gap-20 mt-10 flex-wrap">
-        <div className="text-center">
-          <img
-            className="h-40 w-40 rounded-full object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
-            src="soft.jpg"
-            alt=""
-          />
-          <div className="mt-4 font-serif text-red-600 text-xl">Soft Drinks</div>
-        </div>
+    <div className="my-4 mx-3 md:mx-8">
+      <div className="text-black font-bold md:text-3xl pt-20 flex justify-center pb-10">Categories</div>
+      <div className="w-fit flex gap-7 md:gap-16 lg:gap-28 mx-auto my-4 ">
+        {icons.map((item) => (
+          <div
+            className="flex flex-col items-center gap-2 cursor-pointer text-gray-700 font-medium hover:text-black"
+            key={item.name}
+          >
+           <div className="bg-gray-300 border-gray-300 rounded-full p-2 hover:border-gray-700 hover:bg-gray-700 transition-all duration-300">
+  <img
+    src={item.src}
+    alt=""
+    className="h-12 w-12 md:h-14 md:w-14 object-cover"
+  />
+</div>
 
-        <div className="text-center">
-          <img
-            className="h-40 w-40 rounded-full object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
-            src="food.avif"
-            alt=""
-          />
-          <div className="mt-4 font-serif text-red-600 text-xl">Fast Food</div>
-        </div>
-
-        <div className="text-center">
-          <img
-            className="h-40 w-40 rounded-full object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
-            src="hard.jpg"
-            alt=""
-          />
-          <div className="mt-4 font-serif text-red-600 text-xl">Hard Drinks</div>
-        </div>
-
-        <div className="text-center">
-          <img
-            className="h-40 w-40 rounded-full object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
-            src="sn.jpg"
-            alt=""
-          />
-          <div className="mt-4 font-serif text-red-600 text-xl">Snacks</div>
-        </div>
-      </div>
-      <div className="flex justify-center items-center gap-20 mt-16 flex-wrap">
-        <div className="text-center">
-          <img
-            className="h-40 w-40 rounded-full object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
-            src="burger.jpg"
-            alt=""
-          />
-          <div className="mt-4 font-serif text-red-600 text-xl">Burger</div>
-        </div>
-
-        <div className="text-center">
-          <img
-            className="h-40 w-40 rounded-full object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
-            src="pza.jpeg"
-            alt=""
-          />
-          <div className="mt-4 font-serif text-red-600 text-xl">Pizza</div>
-        </div>
+            <p className=" p-0 m-0 text-xs sm:text-sm ">{item.name}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default Category;
+export default Categories;

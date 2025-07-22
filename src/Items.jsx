@@ -50,7 +50,7 @@ function Card({ item, onImageClick, added, onAddToCart }) {
 function Section({ title, items, onImageClick, addedItems, onAddToCart }) {
   return (
     <>
-      <div className="flex justify-center items-center mt-10 md:mt-20 text-3xl md:text-4xl font-serif">
+      <div className="text-black font-bold md:text-3xl pt-20 flex justify-center">
         {title}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mt-5 mb-5 px-2 sm:px-0">
