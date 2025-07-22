@@ -4,6 +4,7 @@ const ProductDataApi = async (setProductData)=>{
         
         if(request.status == 200){
             setProductData(response.recipes);
+            
         }
 
 };

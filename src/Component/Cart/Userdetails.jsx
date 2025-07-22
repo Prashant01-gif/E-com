@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react'
 import TextInput from './TextInput'
 import Button from '../Navbar/Btn';
+import { useNavigate } from 'react-router';
 
 const Userdetails = () => {
+ const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   const name = useRef();
@@ -31,6 +33,8 @@ const Userdetails = () => {
     } else {
       setError(0);
       console.log("✅ All inputs valid!");
+      alert("Order placed Successfully")
+      navigate("/");
     }
   };
 
