@@ -3,43 +3,53 @@ import TextInput from './TextInput'
 import Button from '../Navbar/Btn';
 
 const Userdetails = () => {
-    const [error, setError] = useState();
-    const name= useRef();
-    const contact= useRef();
-    const address= useRef();
-    const handleClick= ()=>{
-        console.log("name" , name.current.value)
-        console.log("contact", contact.current.value)
-        console.log("Address", address.current.value)
-        if(name.current.value == null){
-            setError(1)
-            
-        }
-        else if(contact.current.value == null){
-            setError(2)
-        }
-        else if(address.current.value == null){
-            setError(3)
-        }
-        else{
-          setError(0)
-        }
-    
-     
-    }
-  return (
-    <div>
-        <TextInput placeholder={"Enter your name"} name={"Name"} ref={name}/>
-         <TextInput placeholder={"Enter your contact"} name={"Contact"} ref={contact}/>
-         <TextInput placeholder={"Enter your Address"} name={"Address"} ref={address}/>
-       
-         
-      <div  className="flex justify-center mr-[150px] mt-3 px-4 max-w-full sm:max-w-lg md:max-w-xl mx-auto">
-  <Button title={"Proceed"} onClick={handleClick} />
-</div>
-         </div>
- 
-  )
-}
+  const [error, setError] = useState(null);
 
-export default Userdetails
+  const name = useRef();
+  const contact = useRef();
+  const address = useRef();
+
+  const handleClick = () => {
+    const nameVal = name.current.value.trim();
+    const contactVal = contact.current.value.trim();
+    const addressVal = address.current.value.trim();
+
+    console.log("Name:", nameVal);
+    console.log("Contact:", contactVal);
+    console.log("Address:", addressVal);
+
+    const nameRegex = /^[a-zA-Z\s]{2,30}$/;  // letters & spaces, 2–30 chars
+    const contactRegex = /^[0-9]{7,15}$/;   // digits only, 7–15 digits
+    const addressRegex = /^.{5,100}$/;      // any character, 5–100 chars
+
+    if (!nameRegex.test(nameVal)) {
+      setError(1);
+    } else if (!contactRegex.test(contactVal)) {
+      setError(2);
+    } else if (!addressRegex.test(addressVal)) {
+      setError(3);
+    } else {
+      setError(0);
+      console.log("✅ All inputs valid!");
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <TextInput placeholder="Enter your name" name="Name" ref={name} />
+      {error === 1 && <p className="text-red-500 text-sm flex justify-center">Invalid name</p>}
+
+      <TextInput placeholder="Enter your contact" name="Contact" ref={contact} />
+      {error === 2 && <p className="text-red-500 text-sm lex justify-center ">Invalid contact number</p>}
+
+      <TextInput placeholder="Enter your address" name="Address" ref={address} />
+      {error === 3 && <p className="text-red-500 text-sm lex justify-center">Invalid address</p>}
+
+      <div className="flex justify-center mt-3 mr-[150px]">
+        <Button title="Proceed" onClick={handleClick} />
+      </div>
+    </div>
+  );
+}; 
+
+export default Userdetails;
