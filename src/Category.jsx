@@ -5,7 +5,7 @@ const icons = [
   { name: "Dinner", src: "./d2.png" },
   { name: "Lunch", src: "./L1.png" },
   { name: "Beverage", src: "./b2.png" },
-  { name: "Drinks", src: "./Icons/drink.png" },
+  { name: "Snack", src: "./f1.png" },
 ];
 
 const Categories = () => {
