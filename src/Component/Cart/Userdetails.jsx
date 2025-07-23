@@ -34,6 +34,7 @@ const Userdetails = () => {
       setError(0);
       console.log("✅ All inputs valid!");
       alert("Order placed Successfully")
+      localStorage.removeItem('cart')
       navigate("/");
     }
   };

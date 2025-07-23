@@ -50,7 +50,7 @@ function Card({ item, onImageClick, added, onAddToCart }) {
 function Section({ title, items, onImageClick, addedItems, onAddToCart }) {
   return (
     <>
-      <div className="text-black font-bold md:text-3xl pt-20 flex justify-center">
+      <div className="fext-black font-bold md:text-3xl pt-20 flex justify-center pb-10">
         {title}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mt-5 mb-5 px-2 sm:px-0">
@@ -68,16 +68,13 @@ function Section({ title, items, onImageClick, addedItems, onAddToCart }) {
   );
 }
 
-function Items() {
-  const [productData, setProductData] = useState([]);
+function Items({productData}) {
+ 
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [addedItems, setAddedItems] = useState({});
-
-  useEffect(() => {
-    ProductDataApi(setProductData).finally(() => setLoading(false));
-  }, []);
+  
 
   const handleImageClick = (product) => {
     setSelectedProduct(product);
@@ -97,9 +94,7 @@ function Items() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6">
-      {loading ? (
-        <div className="text-center py-20 text-lg">Loading...</div>
-      ) : (
+      
         <Section
           title="Recipes"
           items={productData}
@@ -107,7 +102,7 @@ function Items() {
           addedItems={addedItems}
           onAddToCart={handleAddToCart}
         />
-      )}
+      
 
       {showModal && selectedProduct && (
         <Model
