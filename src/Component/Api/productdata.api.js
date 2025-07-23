@@ -3,8 +3,8 @@ const ProductDataApi = async (setProductData,setMainData)=>{
         const response = await request.json();
         
         if(request.status == 200){
-            // setProductData(response.recipes);
-            // setMainData(response.recipes);
+            setProductData(response.recipes);
+            setMainData(response.recipes);
             
         }
 
