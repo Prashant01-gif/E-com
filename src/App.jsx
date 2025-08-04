@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Component/Navbar'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom'
 import Home from './Component/Home'
 import Category from './Category'
 import Items from './Items'
@@ -13,6 +13,13 @@ import ProductDataApi from './Component/Api/productdata.api'
 
 
 function App() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  if(!token){
+    
+  }
+
+
    const [productData, setProductData] = useState([]);
   const [maindata,setMainData]=useState([])
   useEffect(() => {

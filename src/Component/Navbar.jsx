@@ -1,9 +1,17 @@
 import React from 'react';
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import Button from './Navbar/Btn';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { MdOutlineSettings } from "react-icons/md";
+
 
 function Navbar() {
+  const navigate = useNavigate();
+  const handleLogout = () =>{
+    localStorage.removeItem("token");
+    alert("Log out successfully");
+    navigate("/auth")
+  }
   return (
     <nav className="bg-gray-100 shadow-2xl italic text-black p-2 sm:p-3 flex flex-wrap justify-between items-center sticky top-0 z-50 gap-2">
    
@@ -28,12 +36,15 @@ function Navbar() {
         </button>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-10 pr-5">
         <NavLink to={"/Cart"}>
           <FaShoppingCart className="text-xl sm:text-2xl" />
         </NavLink>
 
-        <Button title="Login" />
+            <NavLink to={"/setting"}>
+          <MdOutlineSettings className="text-yellow-800 text-3xl" />
+        </NavLink>
+
       </div>
     </nav>
   );

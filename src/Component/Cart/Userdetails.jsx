@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
-import TextInput from './TextInput'
+import React, { useRef, useState } from 'react';
+import TextInput from './TextInput';
 import Button from '../Navbar/Btn';
 import { useNavigate } from 'react-router';
 
 const Userdetails = () => {
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   const name = useRef();
@@ -33,28 +33,28 @@ const Userdetails = () => {
     } else {
       setError(0);
       console.log("✅ All inputs valid!");
-      alert("Order placed Successfully")
-      localStorage.removeItem('cart')
+      alert("Order placed Successfully");
+      localStorage.removeItem('cart');
       navigate("/");
     }
   };
 
   return (
     <div className="space-y-4">
-      <TextInput placeholder="Enter your name" name="Name" ref={name} />
+      <TextInput placeholder="Enter your name" label="Name" ref={name} />
       {error === 1 && <p className="text-red-500 text-sm flex justify-center">Invalid name</p>}
 
-      <TextInput placeholder="Enter your contact" name="Contact" ref={contact} />
-      {error === 2 && <p className="text-red-500 text-sm lex justify-center ">Invalid contact number</p>}
+      <TextInput placeholder="Enter your contact" label="Contact" ref={contact} />
+      {error === 2 && <p className="text-red-500 text-sm flex justify-center">Invalid contact number</p>}
 
-      <TextInput placeholder="Enter your address" name="Address" ref={address} />
-      {error === 3 && <p className="text-red-500 text-sm lex justify-center">Invalid address</p>}
+      <TextInput placeholder="Enter your address" label="Address" ref={address} />
+      {error === 3 && <p className="text-red-500 text-sm flex justify-center">Invalid address</p>}
 
-      <div className="flex justify-center mt-3 mr-[150px]">
+      <div className="flex justify-center mt-3 mr-40">
         <Button title="Proceed" onClick={handleClick} />
       </div>
     </div>
   );
-}; 
+};
 
 export default Userdetails;

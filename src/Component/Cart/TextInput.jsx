@@ -1,29 +1,23 @@
-import React from "react";
-
-const TextInput = ({ name, placeholder, ref, err }) => {
-    
+const TextInput = ({ label, placeholder, ref, err, errormessage }) => {
   return (
-    <div>
-      
-        <div className="flex items-center justify-center"> 
-          <div className="flex gap-2 flex-col">
-          <div className="font-semibold ">
-              {name}
-          </div>
-            <div className="">
-              <input
-                className="border-black border-[1px] w-75 h-9 rounded-lg outline-none"
-                type="text"
-                placeholder={placeholder}
-                ref={ref}
-              />
-            </div>
-          </div>
+    <div className="">
+      <div className="text-sm font-semibold text-gray-700">{label}:</div>
+      <input
+        className={`border w-full ${
+          err ? "border-red-400" : "border-gray-300"
+        } bg-slate-50 rounded-sm p-1 px-2`}
+        placeholder={placeholder}
+        ref={ref}
+      />
 
-        </div>
+      <div className="h-5 text-xs text-red-500 px-2">
+        {err && (
+          <span>
+            {errormessage ? errormessage : "Please provide a valid input"}
+          </span>
+        )}
       </div>
-    
+    </div>
   );
 };
-
 export default TextInput;
