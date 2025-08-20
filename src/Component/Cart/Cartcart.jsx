@@ -11,7 +11,7 @@ const Cartcart = ({ item, setCart }) => {
         {/* Image */}
         <div className="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 flex-shrink-0">
           <img
-            src={item?.image}
+            src={item.image}
             alt={item?.name}
             className="w-full h-48 sm:h-full object-cover rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
           />
@@ -20,7 +20,7 @@ const Cartcart = ({ item, setCart }) => {
         <div className="flex flex-col justify-between w-full p-4 sm:p-6">
           <div className="flex justify-between items-start w-full mb-2">
             <div className="text-gray-800 font-bold text-lg sm:text-xl font-serif pr-4">
-              {item?.name}
+              {item.pName}
             </div>
             <div className="text-red-800 text-2xl cursor-pointer">
               <MdOutlineRemoveShoppingCart
@@ -37,11 +37,11 @@ const Cartcart = ({ item, setCart }) => {
 
           <div className="flex justify-between items-center w-full flex-wrap gap-2">
             <div className="text-red-800 font-bold text-lg sm:text-xl">
-              ${item?.caloriesPerServing}
+              ${item.price}
             </div>
 
             <div className="">
-              <Quantity quantity={item?.quantity} data={item} setCart={setCart}/>
+              <Quantity quantity={item.quantity} data={item} setCart={setCart}/>
             </div>
 
             <button className="flex h-10 px-4 justify-center items-center border border-green-500 rounded-xl bg-green-500 text-white transition-colors duration-300 min-w-[80px] text-sm md:text-base hover:bg-green-600 hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">

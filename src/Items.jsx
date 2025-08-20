@@ -5,40 +5,68 @@ import Model from "./Component/Model";
 import AddToCart from "./Component/localStorage/AddTOCart";
 
 function Card({ item, onImageClick, added, onAddToCart }) {
-  const { name, image, mealType } = item;
+  const { pName, image, description, rating = 0, price } = item;
+
+  // Function to render stars from rating
+  const renderStars = (rating) => {
+    const stars = [];
+    const maxStars = 5;
+    for (let i = 1; i <= maxStars; i++) {
+      stars.push(
+        <span
+          key={i}
+          className={i <= Math.floor(rating) ? "text-yellow-500" : "text-gray-300"}
+        >
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
 
   return (
-    <div className="border-gray-200 bg-white p-4 shadow-lg hover:shadow-2xl transition mx-auto w-full max-w-xs sm:max-w-none mb-5">
+    <div className="border border-gray-200 bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-200 mx-auto w-full max-w-xs sm:max-w-none mb-5">
+      {/* Product Image */}
       <img
         onClick={onImageClick}
-        className="rounded-lg w-full h-60 object-cover cursor-pointer"
+        className="rounded-md w-full h-56 object-cover cursor-pointer"
         src={image}
-        alt={name}
+        alt={pName}
       />
-      <div>
-        <h2 className="text-gray-800 font-bold text-lg md:text-xl font-serif p-2">
-          {name}
+
+      {/* Product Info */}
+      <div className="mt-3">
+        <h2 className="text-gray-800 font-semibold text-lg line-clamp-1">
+          {pName}
         </h2>
-        <h2 className="text-sm text-gray-500 px-2">
-          {mealType}
-        </h2>
-        <div className="flex justify-between items-center mt-2 px-2">
-          <p className="text-red-700 font-semibold text-base md:text-lg">
-            ${item?.caloriesPerServing}
-          </p>
+
+        {/* Rating */}
+        <div className="flex items-center mt-1 text-sm">
+          {renderStars(rating)}
+          <span className="ml-1 text-gray-500">({rating})</span>
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+          {description}
+        </p>
+
+        {/* Price + Cart Button */}
+        <div className="flex justify-between items-center mt-3">
+          <p className="text-red-600 font-bold text-lg">${price}</p>
 
           {!added ? (
             <button
               onClick={onAddToCart}
-              className="border-red-700 bg-red-700 rounded-xl px-3 md:px-4 py-1 md:py-2 text-white text-sm md:text-base shadow-lg hover:shadow-2xl transition"
+              className="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1.5 rounded-md shadow-sm transition duration-150"
             >
               Add to Cart
             </button>
           ) : (
             <button
-              className="bg-green-600 rounded-xl px-3 md:px-4 py-1 md:py-2 text-white text-sm md:text-base shadow-lg"
+              className="bg-green-500 text-white text-xs px-3 py-1.5 rounded-md shadow-sm cursor-default"
             >
-              Added to Cart
+              ✓ Added
             </button>
           )}
         </div>
@@ -47,34 +75,40 @@ function Card({ item, onImageClick, added, onAddToCart }) {
   );
 }
 
+
+
 function Section({ title, items, onImageClick, addedItems, onAddToCart }) {
   return (
     <>
-      <div className="fext-black font-bold md:text-3xl pt-20 flex justify-center pb-10">
+      <div className="text-black font-bold text-2xl md:text-3xl pt-20 flex justify-center pb-10">
         {title}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mt-5 mb-5 px-2 sm:px-0">
-        {items.map((item) => (
-          <Card
-            key={item.id}
-            item={item}
-            onImageClick={() => onImageClick(item)}
-            added={addedItems[item.id]}
-            onAddToCart={() => onAddToCart(item)}
-          />
-        ))}
+        {items.map((item) => {
+          // Use _id if available, otherwise use id, or generate a fallback key
+          const itemKey = item._id || item.id || `item-${item.pName}-${Math.random()}`;
+          const itemId = item._id || item.id;
+          
+          return (
+            <Card
+              key={itemKey}
+              item={item}
+              onImageClick={() => onImageClick(item)}
+              added={addedItems[itemId]}
+              onAddToCart={() => onAddToCart(item)}
+            />
+          );
+        })}
       </div>
     </>
   );
 }
 
-function Items({productData}) {
- 
+function Items({ productData }) {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [addedItems, setAddedItems] = useState({});
-  
 
   const handleImageClick = (product) => {
     setSelectedProduct(product);
@@ -87,28 +121,39 @@ function Items({productData}) {
   };
 
   const handleAddToCart = (item) => {
-    setAddedItems((prev) => ({ ...prev, [item.id]: true }));
+    // Use _id if available, otherwise use id
+    const itemId = item._id || item.id;
+    setAddedItems((prev) => ({ ...prev, [itemId]: true }));
     console.log(item);
     AddToCart(item);
   };
 
+  // Add safety check for productData
+  if (!productData || !Array.isArray(productData)) {
+    return (
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="flex justify-center items-center h-64">
+          <div className="text-xl text-gray-600">Loading products...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 sm:px-6">
-      
-        <Section
-          title="Recipes"
-          items={productData}
-          onImageClick={handleImageClick}
-          addedItems={addedItems}
-          onAddToCart={handleAddToCart}
-        />
-      
+      <Section
+        title="Recipes"
+        items={productData}
+        onImageClick={handleImageClick}
+        addedItems={addedItems}
+        onAddToCart={handleAddToCart}
+      />
 
       {showModal && selectedProduct && (
         <Model
           item={selectedProduct}
           onClose={handleCloseModal}
-          added={addedItems[selectedProduct.id]}
+          added={addedItems[selectedProduct._id || selectedProduct.id]}
           onAddToCart={() => handleAddToCart(selectedProduct)}
         />
       )}

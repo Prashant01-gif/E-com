@@ -1,10 +1,12 @@
-const ProductDataApi = async (setProductData,setMainData)=>{
-        const request  = await fetch("https://dummyjson.com/recipes");
+import mainEndPoint from "./User/mainEndPoint";
+
+const ProductDataApi = async (setProductData)=>{
+        const request  = await fetch( mainEndPoint+ "product");
         const response = await request.json();
-        
+       
         if(request.status == 200){
-            setProductData(response.recipes);
-            setMainData(response.recipes);
+            setProductData(response.data);
+           
             
         }
 

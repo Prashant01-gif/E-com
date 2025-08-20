@@ -11,14 +11,14 @@ const icons = [
 const Categories = ({ maindata, setProductData }) => {
   const [selected,setSelected]=useState('')
   const click = (name) => {
-    if (name == "All") {
-      setProductData(maindata);
-      setSelected(name)
-    } else {
-      let temp = maindata.filter((item) => item.mealType[0] == name);
-      setProductData(temp);
-      setSelected(name)
-    }
+      if (name == "All") {
+        setProductData(maindata);
+        setSelected(name)
+      } else {
+        let temp = maindata.filter((item) => item.mealType[0] == name);
+        setProductData(temp);
+        setSelected(name)
+      }
   };
   return (
     <div className="my-4 mx-3 md:mx-8">

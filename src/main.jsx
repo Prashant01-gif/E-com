@@ -10,6 +10,10 @@ import {
   RouterProvider,
 } from "react-router";
 import Home from './Home.jsx'
+import AddProduct from './Component/AddProduct/AddProduct.jsx'
+
+import DashboardMain from './Component/Dashboard/DashboardMain.jsx'
+
 
 
 const router = createBrowserRouter([
@@ -31,6 +35,14 @@ const router = createBrowserRouter([
     element: <Setting/>,
 
   },
+  {
+    path: "/Productdata",
+    element: <AddProduct/>,
+  },
+ {
+  path:"/dashboard",
+  element: <DashboardMain/>,
+ }
     ]
   }
 

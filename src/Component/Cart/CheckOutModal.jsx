@@ -1,10 +1,23 @@
 import React from "react";
 import Userdetails from "./Userdetails";
 import Totalamount from "../CustomFunction/Totalamount";
+import Button from "../Navbar/Btn";
+import Cart from "./Cart";
+import generateCartItems from "../CustomFunction/generateCartItems";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import addOrderApi from "../Api/order/addOrderApi";
 
 const CheckOutModal = ({ visible, setVisible, cart }) => {
   if (!visible) return null;
-
+  const navigate = useNavigate();
+const handleOrder = () =>{
+  const tempData = {
+    totalAmount : Totalamount(cart),
+    items: generateCartItems(cart),
+  };
+  addOrderApi(tempData, navigate )
+};
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-md z-50 p-4"
@@ -29,9 +42,9 @@ const CheckOutModal = ({ visible, setVisible, cart }) => {
           <div className="flex flex-col space-y-1 mt-1">
             {cart?.map((item, index) => (
               <div key={index} className="grid grid-cols-3 py-2 text-center">
-                <div>{item.name}</div>
+                <div>{item.pName}</div>
                 <div>{item.quantity}</div>
-                <div>${item.caloriesPerServing * item.quantity}</div>
+                <div>${item.price * item.quantity}</div>
               </div>
             ))}
           </div>
@@ -44,7 +57,7 @@ const CheckOutModal = ({ visible, setVisible, cart }) => {
         </div>
 
       
-        <Userdetails />
+        <Button title={"Proceed check out"} onClick={()=> handleOrder() } />
       </div>
     </div>
   );

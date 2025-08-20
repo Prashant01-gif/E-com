@@ -2,7 +2,7 @@ const Totalamount = (cartData) => {
     let Totalamount = 0 ;
     cartData.forEach(
         (item) =>
-       { Totalamount= Totalamount + (Number(item.caloriesPerServing) * Number (item.quantity))
+       { Totalamount= Totalamount + (Number(item.price) * Number (item.quantity))
     })
 
     return Totalamount;

@@ -7,11 +7,10 @@ const addToCart = (productData) => {
   } else {
     const tempArr = JSON.parse(localData);
     const existingIndex = tempArr.findIndex(
-      (item) => item.id === productData.id
+      (item) => item._id === productData._id
     );
 
     if (existingIndex !== -1) {
-      // product exists — increment quantity
       tempArr[existingIndex].quantity += 1;
     } else {
       tempArr.push({ ...productData, quantity: 1 });

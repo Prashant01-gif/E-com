@@ -1,21 +1,19 @@
 import SecureFetch from "../Auth/ApiConfiguration";
+import mainEndPoint from "./mainEndPoint";
 
-const deleteUserApi = async (updatedData) => {
-  const request = await SecureFetch(
-    "http://localhost:3000/user/",
-    "DELETE",
-    {
-      "content-type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    updatedData
-  );
-
-  const response = await request.json();
+const deleteUserApi = async () => {
+  const request = await SecureFetch(mainEndPoint+ "user/", "DELETE", {
+    "content-type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  });
   if (request.status == 200) {
-    console.log("request", response);
-    alert("Password Change sucessfully");
+    alert("account deleted sucessfully");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userDetails");
+    localStorage.removeItem("cart");
     window.location.href = "/";
+  } else {
+    alert("Something went wrong please try again");
   }
 };
 export default deleteUserApi;

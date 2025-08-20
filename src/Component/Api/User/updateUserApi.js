@@ -1,8 +1,9 @@
 import SecureFetch from "../Auth/ApiConfiguration";
+import mainEndPoint from "./mainEndPoint";
 
 const updateUserApi = async (updatedData) => {
   const request = await SecureFetch(
-    "http://localhost:3000/user/userDetails",
+    mainEndPoint+ "user/userDetails",
     "PATCH",
     {
       "content-type": "application/json",

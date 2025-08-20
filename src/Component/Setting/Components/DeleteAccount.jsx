@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import deleteUserApi from "../../Api/User/deleteUserApi";
 
 const DeleteAccount = () => {
   const handelLogout = () => {
@@ -8,6 +9,11 @@ const DeleteAccount = () => {
     window.location.href = "/";
   };
 
+    const handelDelete = () => {
+       deleteUserApi();
+  };
+
+
   return (
     <div className="flex flex-col md:flex-row justify-between items-center gap-6 bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 m-3 md:mx-10">
       {/* Delete Account Section */}
@@ -15,6 +21,7 @@ const DeleteAccount = () => {
         <div className="text-black font-semibold text-2xl">Delete Account</div>
         <button
           className="w-full md:w-fit bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2 rounded-md border border-red-500 hover:border-red-700 shadow-md hover:shadow-lg transition-all duration-200"
+             onClick={() => handelDelete()}
         >
           Delete Account
         </button>
