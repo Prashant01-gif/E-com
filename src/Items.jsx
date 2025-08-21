@@ -3,9 +3,16 @@ import Chef from "./chef";
 import ProductDataApi from "./Component/Api/productdata.api";
 import Model from "./Component/Model";
 import AddToCart from "./Component/localStorage/AddTOCart";
+import Button from "./Component/Navbar/Btn";
+import { useNavigate } from "react-router";
 
 function Card({ item, onImageClick, added, onAddToCart }) {
   const { pName, image, description, rating = 0, price } = item;
+  const navigate = useNavigate();
+
+  // Get user role from localStorage
+  const userData = JSON.parse(localStorage.getItem("userDetail"));
+  const isAdmin = userData?.role === "admin";
 
   // Function to render stars from rating
   const renderStars = (rating) => {
@@ -51,30 +58,41 @@ function Card({ item, onImageClick, added, onAddToCart }) {
           {description}
         </p>
 
-        {/* Price + Cart Button */}
-        <div className="flex justify-between items-center mt-3">
+        {/* Price + Buttons */}
+        <div className="flex justify-between items-center mt-3 gap-2">
           <p className="text-red-600 font-bold text-lg">${price}</p>
 
-          {!added ? (
-            <button
-              onClick={onAddToCart}
-              className="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1.5 rounded-md shadow-sm transition duration-150"
-            >
-              Add to Cart
-            </button>
-          ) : (
-            <button
-              className="bg-green-500 text-white text-xs px-3 py-1.5 rounded-md shadow-sm cursor-default"
-            >
-              ✓ Added
-            </button>
-          )}
+          <div className="flex gap-2">
+            {/* Show Edit button only if user is admin */}
+            {isAdmin && (
+              <button
+                onClick={() => navigate("/Productdata")}
+                className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1.5 rounded-md shadow-sm transition duration-150"
+              >
+                Edit
+              </button>
+            )}
+
+            {!added ? (
+              <button
+                onClick={onAddToCart}
+                className="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1.5 rounded-md shadow-sm transition duration-150"
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <button
+                className="bg-green-500 text-white text-xs px-3 py-1.5 rounded-md shadow-sm cursor-default"
+              >
+                ✓ Added
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
 
 
 function Section({ title, items, onImageClick, addedItems, onAddToCart }) {

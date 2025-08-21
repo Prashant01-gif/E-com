@@ -7,6 +7,13 @@ import { useOutlet, useOutletContext } from "react-router";
 
 
 const DashboardMain = () => {
+
+     const userData = JSON.parse(localStorage.getItem("userDetail"));
+  if(!userData || userData.role !=="admin"){
+    console.log("i am admin");
+    window.location.href = "/"
+  }
+
   const mainData = useOutletContext();
   const [activeScreen, setActiveScreen] = useState(1);
   const [orderData, setOrderData] = useState([]);

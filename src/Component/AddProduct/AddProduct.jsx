@@ -5,6 +5,12 @@ import mainEndPoint from '../Api/User/mainEndPoint';
 
 const AddProduct = () => {
 
+    const userData = JSON.parse(localStorage.getItem("userDetail"));
+  if(!userData || userData.role !=="admin"){
+    console.log("i am admin");
+    window.location.href = "/"
+  }
+
  
   
   const [products, setProducts] = useState([]);
@@ -354,8 +360,8 @@ const AddProduct = () => {
             </div>
           )}
          <div className='flex mt-10 justify-center mr-23'>
-              <Button title={"Go Back"} onClick= {() => navigate("/dashboard")} />
-                   <Button title={"Go Home"} onClick= {() => navigate("/")} />
+              <Button title={"Dashboard"} onClick= {() => navigate("/dashboard")} />
+                   <Button title={"Home"} onClick= {() => navigate("/")} />
          </div>
         </div>
         
